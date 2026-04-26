@@ -72,3 +72,13 @@ npm run build   # 构建生产版本
 ### 第三方资源声明
 
 「悲灵 ver.」xlsx 角色卡模板版权归原作者悲灵所有；本插件仅作为该模板的**消费方**（解析读取，不在仓库中分发模板本身）。模板本身不属于本许可证范围。
+
+---
+
+## 💖 支持作者
+
+如果这些插件对你的跑团有帮助，欢迎来爱发电支持一下作者 —— 用于服务器续费和新插件开发 ♥
+
+[![前往爱发电](https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-FullPeople-FF6B9D?style=for-the-badge&logo=heart&logoColor=white)](https://ifdian.net/a/fullpeople)
+
+> 反馈或建议：[1763086701@qq.com](mailto:1763086701@qq.com)
