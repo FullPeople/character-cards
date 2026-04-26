@@ -115,7 +115,7 @@ body:not(.maximized) .panel{display:none}
 .side-head{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:6px}
 .side-head .title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;flex:1;min-width:0}
 .side-head .head-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.side-head .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:#aaa;cursor:pointer;font-size:11px;padding:3px 8px;font-family:inherit;border-radius:4px;line-height:1.3}
+.side-head .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:#aaa;cursor:pointer;font-size:11px;padding:3px 8px;font-family:inherit;border-radius:4px;line-height:1.3;text-decoration:none;display:inline-block}
 .side-head .icon-btn:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25)}
 .side-head .icon-btn.off{color:#666;text-decoration:line-through;opacity:.7}
 .side-head .icon-btn.on{color:#5dade2;border-color:rgba(93,173,226,0.35)}
@@ -158,6 +158,14 @@ body:not(.maximized) .panel{display:none}
     <div class="side-head">
       <div class="title">📇 角色卡</div>
       <div class="head-actions">
+        <a
+          class="icon-btn"
+          href="https://obr.dnd.center/character-cards/template-belling-v1.0.12.xlsx"
+          download="DND5.5E人物卡-悲灵v1.0.12.xlsx"
+          target="_blank"
+          rel="noopener"
+          title="下载本插件支持的悲灵 v1.0.12 角色卡模板（xlsx）"
+        >下载模板</a>
         <button class="icon-btn" id="autoInfoBtn" title="单选已绑定角色时自动弹出信息">弹窗</button>
         <button class="icon-btn" id="aboutBtn" title="关于">关于</button>
         <button class="close" id="closeBtn" title="关闭 (Esc)">✕</button>
