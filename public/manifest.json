@@ -1,0 +1,9 @@
+{
+  "name": "角色卡",
+  "version": "2.0.0",
+  "manifest_version": 1,
+  "author": "FullPeople",
+  "description": "右下角浮动按钮打开全屏角色卡面板，支持xlsx上传与查阅",
+  "icon": "/character-cards/icon.svg",
+  "background_url": "/character-cards/background.html"
+}

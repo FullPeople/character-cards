@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:transparent}
+button{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#3498db,#2980b9);
+  color:#fff;border:1px solid rgba(255,255,255,0.2);
+  border-radius:50%;cursor:pointer;
+  font-size:22px;line-height:1;padding:0;
+  box-shadow:0 3px 10px rgba(0,0,0,0.4);
+  transition:transform .15s, box-shadow .15s;
+  font-family:-apple-system,sans-serif;
+}
+button:hover{transform:scale(1.08);box-shadow:0 4px 14px rgba(52,152,219,0.55)}
+button:active{transform:scale(0.95)}
+</style>
+</head>
+<body>
+<button id="btn" title="角色卡面板">📇</button>
+<script type="module" src="/src/button.ts"></script>
+</body>
+</html>
