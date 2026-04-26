@@ -426,7 +426,7 @@ OBR.onReady(async () => {
     }
   });
 
-  // --- "自动卡" toggle: when ON, single-selecting a bound character opens
+  // --- "弹窗" toggle: when ON, single-selecting a bound character opens
   // the info popover above the main button. Persisted per-browser.
   const AUTO_INFO_KEY = "character-cards/auto-info";
   const TOGGLE_MSG = "com.character-cards/auto-info-toggled";
