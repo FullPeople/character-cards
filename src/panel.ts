@@ -52,7 +52,7 @@ const resCol = document.getElementById("resCol") as HTMLElement;
 const emptyText = document.getElementById("emptyText") as HTMLDivElement;
 const miniBtn = document.getElementById("miniBtn") as HTMLButtonElement;
 const closeBtn = document.getElementById("closeBtn") as HTMLButtonElement;
-const aboutBtn = document.getElementById("aboutBtn") as HTMLButtonElement;
+// "About" button removed — suite's About panel covers it.
 // "弹窗" toggle moved to the floating controls popover next to the main button.
 
 function safeRoomId(s: string): string {
@@ -413,18 +413,7 @@ OBR.onReady(async () => {
   // Close via X button in the sidebar header, Esc, or clicking backdrop.
   closeBtn?.addEventListener("click", minimize);
 
-  aboutBtn?.addEventListener("click", () => {
-    try {
-      OBR.modal.open({
-        id: "com.character-cards/about",
-        url: "https://obr.dnd.center/character-cards/about.html",
-        width: 460,
-        height: 640,
-      });
-    } catch (e) {
-      console.error("[character-cards] open about failed", e);
-    }
-  });
+  // About handler removed — centralized in suite About panel.
 
   // The "弹窗" toggle now lives in the floating controls popover sitting
   // to the left of the main 角色卡 button. localStorage key + broadcast id
