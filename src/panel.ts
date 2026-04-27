@@ -53,7 +53,7 @@ const emptyText = document.getElementById("emptyText") as HTMLDivElement;
 const miniBtn = document.getElementById("miniBtn") as HTMLButtonElement;
 const closeBtn = document.getElementById("closeBtn") as HTMLButtonElement;
 const aboutBtn = document.getElementById("aboutBtn") as HTMLButtonElement;
-const autoInfoBtn = document.getElementById("autoInfoBtn") as HTMLButtonElement;
+// "弹窗" toggle moved to the floating controls popover next to the main button.
 
 function safeRoomId(s: string): string {
   return s.replace(/[^a-zA-Z0-9-]/g, "").slice(0, 64) || "default";
@@ -426,27 +426,11 @@ OBR.onReady(async () => {
     }
   });
 
-  // --- "弹窗" toggle: when ON, single-selecting a bound character opens
-  // the info popover above the main button. Persisted per-browser.
-  const AUTO_INFO_KEY = "character-cards/auto-info";
-  const TOGGLE_MSG = "com.character-cards/auto-info-toggled";
-  const isAutoInfoOn = () => localStorage.getItem(AUTO_INFO_KEY) !== "0"; // default on
-  const updateAutoInfoBtn = () => {
-    if (!autoInfoBtn) return;
-    const on = isAutoInfoOn();
-    autoInfoBtn.classList.toggle("on", on);
-    autoInfoBtn.classList.toggle("off", !on);
-    autoInfoBtn.title = on
-      ? "已开启：单选绑定的角色时自动弹出信息（点击关闭）"
-      : "已关闭：选中绑定角色不会弹出信息（点击开启）";
-  };
-  updateAutoInfoBtn();
-  autoInfoBtn?.addEventListener("click", () => {
-    const next = !isAutoInfoOn();
-    localStorage.setItem(AUTO_INFO_KEY, next ? "1" : "0");
-    updateAutoInfoBtn();
-    try { OBR.broadcast.sendMessage(TOGGLE_MSG, {}, { destination: "LOCAL" }); } catch {}
-  });
+  // The "弹窗" toggle now lives in the floating controls popover sitting
+  // to the left of the main 角色卡 button. localStorage key + broadcast id
+  // are unchanged (character-cards/auto-info, com.character-cards/auto-info-toggled),
+  // so background.ts picks up changes the same way.
+
   document.addEventListener("keydown", (e) => {
     if (!maximized) return;
     if (e.key === "Escape") {

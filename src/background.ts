@@ -2,10 +2,12 @@ import OBR from "@owlbear-rodeo/sdk";
 
 const POPOVER_ID = "com.character-cards/panel";
 const INFO_POPOVER_ID = "com.character-cards/info";
+const CONTROLS_POPOVER_ID = "com.character-cards/controls";
 const BIND_MODAL_ID = "com.character-cards/bind-picker";
 const PANEL_URL = "https://obr.dnd.center/character-cards/panel.html";
 const INFO_URL = "https://obr.dnd.center/character-cards/info.html";
 const BIND_URL = "https://obr.dnd.center/character-cards/bind.html";
+const CONTROLS_URL = "https://obr.dnd.center/character-cards/controls.html";
 const ICON_URL = "https://obr.dnd.center/character-cards/icon.svg";
 
 const BIND_META = "com.character-cards/boundCardId";
@@ -18,6 +20,13 @@ const INFO_HIDE_MSG = "com.character-cards/info-hide";
 const POPOVER_BOX = 64;
 const BOTTOM_OFFSET = 160;
 const RIGHT_OFFSET = 12;
+
+// Floating "controls" popover (two toggle buttons) sits to the LEFT of the
+// main 角色卡 button. 92×48; baseline aligned with the main button's
+// bottom edge; 8px horizontal gap between the two popovers.
+const CONTROLS_W = 92;
+const CONTROLS_H = 48;
+const CONTROLS_GAP = 8;
 
 const INFO_WIDTH = 320;
 const INFO_HEIGHT = 360;
@@ -48,6 +57,38 @@ async function openPopover() {
 
 async function closePopover() {
   try { await OBR.popover.close(POPOVER_ID); } catch {}
+}
+
+// --- Controls popover (弹窗 toggles) — sits to the LEFT of the main button ---
+async function openControlsPopover() {
+  try {
+    const [w, h] = await Promise.all([
+      OBR.viewport.getWidth(),
+      OBR.viewport.getHeight(),
+    ]);
+    // Anchor (RIGHT/BOTTOM) puts the popover's bottom-right corner here, so
+    // the popover spans [w - left - W, w - left] horizontally. We want its
+    // RIGHT edge to be (main button left) - GAP = (w - RIGHT_OFFSET - 64) - GAP.
+    const anchorLeft = w - RIGHT_OFFSET - POPOVER_BOX - CONTROLS_GAP;
+    await OBR.popover.open({
+      id: CONTROLS_POPOVER_ID,
+      url: CONTROLS_URL,
+      width: CONTROLS_W,
+      height: CONTROLS_H,
+      anchorReference: "POSITION",
+      anchorPosition: { left: anchorLeft, top: h - BOTTOM_OFFSET },
+      anchorOrigin: { horizontal: "RIGHT", vertical: "BOTTOM" },
+      transformOrigin: { horizontal: "RIGHT", vertical: "BOTTOM" },
+      hidePaper: true,
+      disableClickAway: true,
+    });
+  } catch (e) {
+    console.error("[character-cards] openControlsPopover failed", e);
+  }
+}
+
+async function closeControlsPopover() {
+  try { await OBR.popover.close(CONTROLS_POPOVER_ID); } catch {}
 }
 
 // --- Info popover (bound-card preview above the main button) ---
@@ -160,13 +201,17 @@ async function handleSelection(selection: string[] | undefined) {
 OBR.onReady(async () => {
   // Main button popover only — info popover is opened on-demand when a bound
   // character is selected so it doesn't block mouse events when empty.
+  // Controls popover (弹窗 toggles) is opened alongside the main button
+  // whenever the scene is ready, so the user always has the toggle visible.
   const showIfReady = async () => {
     try {
       if (await OBR.scene.isReady()) {
         await openPopover();
+        await openControlsPopover();
       } else {
         await closePopover();
         await closeInfoPopover();
+        await closeControlsPopover();
       }
     } catch {}
   };
@@ -174,9 +219,11 @@ OBR.onReady(async () => {
   OBR.scene.onReadyChange(async (ready) => {
     if (ready) {
       await openPopover();
+      await openControlsPopover();
     } else {
       await closePopover();
       await closeInfoPopover();
+      await closeControlsPopover();
     }
   });
 

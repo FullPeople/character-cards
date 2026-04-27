@@ -16,6 +16,7 @@ export default defineConfig(({ command }) => ({
         panel: resolve(__dirname, "panel.html"),
         bind: resolve(__dirname, "bind.html"),
         info: resolve(__dirname, "info.html"),
+        controls: resolve(__dirname, "controls.html"),
       },
     },
   },

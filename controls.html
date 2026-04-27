@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>弹窗开关</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%;overflow:hidden;background:transparent;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.bar{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:4px 6px;
+  pointer-events:none;
+}
+.tog{
+  pointer-events:auto;
+  position:relative;
+  width:40px;height:40px;
+  background:linear-gradient(135deg,rgba(22,33,62,0.92),rgba(15,52,96,0.92));
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:50%;
+  cursor:pointer;
+  padding:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px rgba(0,0,0,0.4);
+  transition:box-shadow .15s, filter .15s, transform .08s;
+  font-family:inherit;
+  overflow:hidden;
+}
+.tog:hover{box-shadow:0 5px 16px rgba(52,152,219,0.5);filter:brightness(1.1)}
+.tog:active{transform:scale(0.94)}
+.tog .ic{
+  width:24px;height:24px;display:block;
+  transition:filter .15s, opacity .15s;
+}
+.tog.off .ic{filter:grayscale(1) brightness(0.55);opacity:.55}
+.tog .slash{
+  position:absolute;inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s;
+}
+.tog.off .slash{opacity:1}
+.tog.off{
+  border-color:rgba(231,76,60,0.55);
+  background:linear-gradient(135deg,rgba(40,30,30,0.92),rgba(60,30,30,0.92));
+}
+</style>
+</head>
+<body>
+<div class="bar">
+  <button class="tog" id="togBest" type="button" data-on="" title="">
+    <img class="ic" id="icBest" alt="" src="https://obr.dnd.center/bestiary/icon.svg">
+    <svg class="slash" viewBox="0 0 40 40" aria-hidden="true">
+      <line x1="6" y1="6" x2="34" y2="34" stroke="#e74c3c" stroke-width="3.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <button class="tog" id="togCard" type="button" data-on="" title="">
+    <img class="ic" id="icCard" alt="" src="https://obr.dnd.center/character-cards/icon.svg">
+    <svg class="slash" viewBox="0 0 40 40" aria-hidden="true">
+      <line x1="6" y1="6" x2="34" y2="34" stroke="#e74c3c" stroke-width="3.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+<script type="module" src="/src/controls.ts"></script>
+</body>
+</html>
